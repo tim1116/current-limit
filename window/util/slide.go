@@ -54,6 +54,7 @@ func (l *CounterSlide) dealMap(now time.Time) {
 }
 
 // 检查itemArr 中的元素
+// 这里也可以只记录允许通过的记录 用切片记录即可
 func (l *CounterSlide) checkItem(now time.Time) bool {
 	var limit = 0
 	for key, value := range l.itemMap {
@@ -82,5 +83,5 @@ func (l *CounterSlide) Set(r int, cycle time.Duration) {
 	l.rate = r
 	l.cycle = cycle
 
-	l.itemMap = make(map[int]slideItem, 100)
+	l.itemMap = make(map[int]slideItem)
 }
