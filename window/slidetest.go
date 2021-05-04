@@ -16,7 +16,12 @@ func main() {
 
 // 集群版本测试
 func testRedis() {
-	lr := util.NewSlideRedis(1, time.Second)
+	var lr util.CounterRedis
+	lr.Set(1, time.Second)
+
+	//if lr.Allow() {
+	//	common.Logger().Info("响应请求:" + strconv.Itoa(i))
+	//}
 
 	common.Show(lr)
 }
