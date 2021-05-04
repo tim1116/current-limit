@@ -10,6 +10,19 @@ import (
 
 // 活动窗口限流
 func main() {
+	//testOne()
+	testRedis()
+}
+
+// 集群版本测试
+func testRedis() {
+	lr := util.NewSlideRedis(1, time.Second)
+
+	common.Show(lr)
+}
+
+// 单机版本test
+func testOne() {
 	var wg sync.WaitGroup
 	var lr util.CounterSlide
 
