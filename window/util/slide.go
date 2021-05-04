@@ -47,7 +47,7 @@ func (l *CounterSlide) Allow() bool {
 func (l *CounterSlide) dealMap(now time.Time) {
 	for key, value := range l.itemMap {
 		thisTime := value.time
-		if now.Sub(thisTime) >= l.cycle {
+		if now.Sub(thisTime) > l.cycle {
 			delete(l.itemMap, key)
 		}
 	}
@@ -58,7 +58,7 @@ func (l *CounterSlide) checkItem(now time.Time) bool {
 	var limit = 0
 	for key, value := range l.itemMap {
 		thisTime := value.time
-		if now.Sub(thisTime) >= l.cycle {
+		if now.Sub(thisTime) > l.cycle {
 			delete(l.itemMap, key)
 			continue
 		}
