@@ -28,6 +28,8 @@ func main() {
 	testFix2(timeDura)
 	fmt.Println("---------------")
 	testSlide(timeDura)
+	fmt.Println("---------------")
+	testSlideRedis(timeDura)
 }
 
 // 输出检查结果
@@ -68,6 +70,18 @@ func testFix2(t []time.Duration) {
 // 测试滑动窗口计数器
 func testSlide(t []time.Duration) {
 	var lr util.CounterSlide
+	lr.Set(5, time.Second)
+
+	check(lr.Allow())
+	for _, v := range t {
+		time.Sleep(v)
+		check(lr.Allow())
+	}
+}
+
+// 滑动窗口redis版本
+func testSlideRedis(t []time.Duration) {
+	var lr util.CounterRedis
 	lr.Set(5, time.Second)
 
 	check(lr.Allow())
