@@ -19,6 +19,12 @@
 - 单机版本 [实现](./window/util/slide.go)
 - 集群版本 [实现](./window/util/slide_redis.go)
 
+#### 漏桶算法
+- 待补充
+
+#### 令牌桶算法
+- 待补充
+
 ### 外部包引用
 - phachon/go-logger 用来做日志实现 
 - github.com/garyburd/redigo/redis 实现redis操作
