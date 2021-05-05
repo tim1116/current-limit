@@ -11,5 +11,5 @@
 
 ### 外部包引用
 - phachon/go-logger 用来做日志实现 
-- go get github.com/go-redis/redis/v8 (go-redis实现redis操作)
+- github.com/garyburd/redigo/redis 实现redis操作
 

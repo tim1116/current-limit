@@ -17,13 +17,23 @@ func main() {
 // 集群版本测试
 func testRedis() {
 	var lr util.CounterRedis
-	lr.Set(1, time.Second)
+	var wg sync.WaitGroup
 
-	//if lr.Allow() {
-	//	common.Logger().Info("响应请求:" + strconv.Itoa(i))
-	//}
+	lr.Set(3, time.Second)
 
-	common.Show(lr)
+	for i := 1; i <= 20; i++ {
+		wg.Add(1)
+		go func(i int) {
+			common.FmtShow("创建请求:" + strconv.Itoa(i))
+			if lr.Allow() {
+				common.Logger().Info("响应请求:" + strconv.Itoa(i))
+			}
+			wg.Done()
+		}(i)
+
+		time.Sleep(200 * time.Millisecond)
+	}
+	wg.Wait()
 }
 
 // 单机版本test
