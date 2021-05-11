@@ -20,7 +20,7 @@
 - 集群版本 [实现](./window/util/slide_redis.go)
 
 #### 漏桶算法
-- 待补充
+- 通过漏桶容量和出水速度决定限流情况 [实现](./bucket/leak/leak.go)
 
 #### 令牌桶算法
 - 待补充

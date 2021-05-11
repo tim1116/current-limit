@@ -12,7 +12,8 @@ func main() {
 	var wg sync.WaitGroup
 	var lr leak.Bucketleak
 
-	lr.Set(2, time.Second)
+	// 漏桶速率 1秒1毫升  漏桶1毫升
+	lr.Set(1, 1)
 
 	// 超过限制则不响应
 	for i := 1; i <= 30; i++ {

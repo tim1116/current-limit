@@ -1,6 +1,7 @@
 package main
 
 import (
+	"current-limit/bucket/leak"
 	"current-limit/common"
 	"current-limit/window/util"
 	"fmt"
@@ -30,6 +31,8 @@ func main() {
 	testSlide(timeDura)
 	fmt.Println("---------------")
 	testSlideRedis(timeDura)
+	fmt.Println("--- 漏桶算法 -----")
+	testBucketLeak(timeDura)
 }
 
 // 输出检查结果
@@ -83,6 +86,18 @@ func testSlide(t []time.Duration) {
 func testSlideRedis(t []time.Duration) {
 	var lr util.CounterRedis
 	lr.Set(5, time.Second)
+
+	check(lr.Allow())
+	for _, v := range t {
+		time.Sleep(v)
+		check(lr.Allow())
+	}
+}
+
+// 漏桶算法测试
+func testBucketLeak(t []time.Duration) {
+	var lr leak.Bucketleak
+	lr.Set(5, 1)
 
 	check(lr.Allow())
 	for _, v := range t {
